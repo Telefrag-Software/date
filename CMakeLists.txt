@@ -190,7 +190,7 @@ endif( )
    installation
 #]===================================================================]
 if( ENABLE_DATE_INSTALL )
-  set( version_config "${CMAKE_CURRENT_BINARY_DIR}/dateConfigVersion.cmake" )
+  set( version_config "${CMAKE_CURRENT_BINARY_DIR}/generated/dateConfigVersion.cmake" )
 
   include( CMakePackageConfigHelpers )
   write_basic_package_version_file( "${version_config}"
@@ -217,11 +217,8 @@ if( ENABLE_DATE_INSTALL )
       export( TARGETS date-tz NAMESPACE date:: APPEND FILE dateTargets.cmake )
   endif( )
 
-  if( WIN32 AND NOT CYGWIN)
-      set( CONFIG_LOC CMake )
-  else( )
-      set( CONFIG_LOC "${CMAKE_INSTALL_LIBDIR}/cmake/date" )
-  endif( )
+  set( CONFIG_LOC "${CMAKE_INSTALL_LIBDIR}/cmake/date" )
+
   install( EXPORT dateConfig
     FILE dateTargets.cmake
     NAMESPACE date::
